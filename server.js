@@ -39,3 +39,11 @@ function getProjectData(req, res) {
 }
 
 //Post route
+app.post('/addProjectData', addProjectData);
+
+function addProjectData(req, res) {
+  projectData.temp = req.body.temp;
+  projectData.date = req.body.date;
+  projectData.userResponse = req.body.userResponse;
+  console.log(projectData);
+}
