@@ -27,7 +27,16 @@ function performAction(e) {
 }
 
 /* Function to GET Web API Data*/
-
+const getWeather = async (baseUrl, zipOrCity, celciusUnit, APIkey) => {
+  const res = await fetch(baseUrl+zipOrCity+celciusUnit+APIkey)
+  try {
+    const data = await res.json();
+    return data.main.temp;
+  } catch(error) {
+    console.log("error",error);
+    alert("Something went wrong!");
+  }
+}
 
 /* Function to POST data */
 
