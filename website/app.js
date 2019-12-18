@@ -58,3 +58,15 @@ const postData = async (url='', data={}) => {
 }
 
 /* Function to GET Project Data */
+const updateUI = async () => {
+  const res = await fetch('/all');
+  try {
+    const projectData = await res.json();
+    document.getElementById('date').innerHTML = projectData.date;
+    document.getElementById('temp').innerHTML = `${projectData.temp}°C`;
+    document.getElementById('content').innerHTML = projectData.userResponse;
+  } catch(error) {
+    console.log("error", error);
+    alert("Something went wrong!");
+  }
+}
