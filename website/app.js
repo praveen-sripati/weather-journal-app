@@ -3,8 +3,11 @@ let baseUrl = "https://api.openweathermap.org/data/2.5/weather?";
 const APIkey = "&appid=113134aff3ecf62594b59dce3068d92e";
 const celciusUnit = "&units=metric";
 
-// Event listener to add function to existing HTML DOM element
+let d = new Date();
+let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
+// Event listener to add function to existing HTML DOM element
+document.getElementById('generate').addEventListener('click', performAction);
 
 /* Function called by event listener */
 
