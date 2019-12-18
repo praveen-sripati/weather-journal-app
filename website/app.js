@@ -10,7 +10,21 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 document.getElementById('generate').addEventListener('click', performAction);
 
 /* Function called by event listener */
+function performAction(e) {
+  const zipOrCity = document.getElementById('zip').value;
+  if (typeof(zipOrCity) === "number") {
+    baseUrl = "https://api.openweathermap.org/data/2.5/weather?zip=";
+  } else {
+    baseUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+  }
+  const userResponse = document.getElementById('feelings').value;
 
+  getWeather(baseUrl, zipOrCity, celciusUnit, APIkey)
+  .then((data) => {
+    postData('/addProjectData', {temp:data, date:newDate, userResponse: userResponse});
+    updateUI();
+  })
+}
 
 /* Function to GET Web API Data*/
 
