@@ -31,5 +31,11 @@ function listening() {
 }
 
 //Get route
+app.get('/all', getProjectData);
+
+function getProjectData(req, res) {
+  console.log(projectData);
+  res.send(projectData);
+}
 
 //Post route
