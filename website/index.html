@@ -14,7 +14,7 @@
   </div>
   <div class ="holder zip">
     <label for="zip">Enter Zipcode/City Name:</label>
-    <input type="text" id="zip" placeholder="Enter zip code here">
+    <input type="text" id="zip" placeholder="e.g 421302,in or bhiwandi">
   </div>
   <div class ="holder feel">
     <label for="feelings">How are you feeling today?</label>
@@ -22,11 +22,23 @@
     <button id="generate" type = "submit"> Generate </button>
   </div>
   <div class ="holder entry">
-    <div class = "title">Most Recent Entry</div>
-    <div id = "entryHolder">
-      <div id = "date"></div>
-      <div id = "temp"></div>
-      <div id = "content"></div>
+    <div class="card">
+      <div class = "title">Most Recent Entry</div>
+      <div class = "entryHolder">
+        <div id = "date" class="dateStyle"></div>
+        <div id = "city" class="cityStyle"></div>
+        <div id = "temp" class="tempStyle"></div>
+        <div id = "content" class="contentStyle"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class = "title">Previous Entry</div>
+      <div id="prevEntry" class="entryHolder">
+        <div id = "prevDate" class="dateStyle"></div>
+        <div id = "prevCity" class="cityStyle"></div>
+        <div id = "prevTemp" class="tempStyle"></div>
+        <div id = "prevContent" class="contentStyle"></div>
+      </div>
     </div>
   </div>
 </div>

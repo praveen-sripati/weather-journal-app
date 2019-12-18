@@ -19,30 +19,48 @@ body{
 }
 
 .holder{
-
 }
 
 .entry{
+    display: flex;
+    flex-flow: row nowrap;
     background-color: #454547;
     padding: 1rem;
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
 }
 
-#entryHolder{
-
+.card {
+    margin-right: 20px;
+    width: 25%;
 }
 
-#date{
-
+.entryHolder{
+    background-color: gray;
+    border-radius: 10px;
 }
 
-#temp{
-
+.dateStyle{
+    font-size: smaller;
+    color: #1B1B1B;
+    font-weight: bold;
 }
 
-#content{
+.tempStyle{
+    color: #82D305;
+    font-size: 2rem;
+    font-weight: bold;
+}
 
+.cityStyle{
+    color: #D61A3C;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.contentStyle{
+    color: #1B1B1B;
+    font-weight: bold;
 }
 
 .headline {

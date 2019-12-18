@@ -3,8 +3,9 @@ let baseUrl = "https://api.openweathermap.org/data/2.5/weather?";
 const APIkey = "&appid=113134aff3ecf62594b59dce3068d92e";
 const celciusUnit = "&units=metric";
 
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = months[d.getMonth()]+' '+ d.getDate()+' '+ d.getFullYear();
 
 // Event listener to add function to existing HTML DOM element
 document.getElementById('generate').addEventListener('click', performAction);
@@ -21,7 +22,7 @@ function performAction(e) {
 
   getWeather(baseUrl, zipOrCity, celciusUnit, APIkey)
   .then((data) => {
-    postData('/addProjectData', {temp:data, date:newDate, userResponse: userResponse});
+    postData('/addProjectData', {city:data.name, temp:data.main.temp, date:newDate, condition: data.weather[0].main, userResponse: userResponse});
     updateUI();
   })
 }
@@ -31,10 +32,15 @@ const getWeather = async (baseUrl, zipOrCity, celciusUnit, APIkey) => {
   const res = await fetch(baseUrl+zipOrCity+celciusUnit+APIkey)
   try {
     const data = await res.json();
-    return data.main.temp;
+    if (res.ok) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
   } catch(error) {
     console.log("error",error);
-    alert("Something went wrong!");
+    // alert("Zipcode or city no found!");
+    alert(error.message);
   }
 }
 
@@ -61,12 +67,30 @@ const postData = async (url='', data={}) => {
 const updateUI = async () => {
   const res = await fetch('/all');
   try {
-    const projectData = await res.json();
-    document.getElementById('date').innerHTML = projectData.date;
-    document.getElementById('temp').innerHTML = `${projectData.temp}°C`;
-    document.getElementById('content').innerHTML = projectData.userResponse;
+    const allData = await res.json();
+    recentEntry(allData);
+    if(allData.length > 1) {
+      previousEntry(allData);
+    }
   } catch(error) {
     console.log("error", error);
     alert("Something went wrong!");
   }
+}
+
+function recentEntry(allData) {
+  document.querySelector('.entryHolder').style.cssText = "margin-top:1rem; padding: 1rem;";
+  document.getElementById('city').innerHTML = allData[0].city;
+  document.getElementById('date').innerHTML = allData[0].date;
+  document.getElementById('temp').innerHTML = `${allData[0].temp}°C ${allData[0].condition}`;
+  document.getElementById('content').innerHTML = "\""+allData[0].userResponse+"\"";
+}
+
+function previousEntry(allData) {
+  document.getElementById('prevEntry').style.cssText = "margin-top:1rem; padding: 1rem;";
+  document.getElementById('prevCity').innerHTML = allData[1].city;
+  document.getElementById('prevDate').innerHTML = allData[1].date;
+  document.getElementById('prevTemp').innerHTML = `${allData[1].temp}°C ${allData[1].condition}`;
+  document.getElementById('prevContent').innerHTML =  "\""+allData[1].userResponse+"\"";
+
 }
