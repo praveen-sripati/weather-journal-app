@@ -170,4 +170,14 @@ button:hover {
     textarea {
         width: calc(100% - 1.17rem);
     }
+
+    .entry {
+        flex-flow: column nowrap;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+        margin-right: 0;
+        width: 100%;
+    }
 }
